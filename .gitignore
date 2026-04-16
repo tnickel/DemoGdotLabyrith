@@ -32,3 +32,9 @@ Thumbs.db
 
 # Large tools
 .tools/
+
+# Images/Graphics
+*.png
+*.jpg
+*.jpeg
+*.webp
