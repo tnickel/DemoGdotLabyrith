@@ -1,0 +1,46 @@
+[gd_resource type="OpenXRActionMap" load_steps=12 format=3]
+
+[sub_resource type="OpenXRAction" id="OpenXRAction_move"]
+resource_name = "move"
+localized_name = "Move"
+action_type = 2
+toplevel_paths = PackedStringArray("/user/hand/left")
+
+[sub_resource type="OpenXRAction" id="OpenXRAction_turn"]
+resource_name = "turn"
+localized_name = "Turn"
+action_type = 2
+toplevel_paths = PackedStringArray("/user/hand/right")
+
+[sub_resource type="OpenXRActionSet" id="OpenXRActionSet_main"]
+resource_name = "main"
+localized_name = "Main"
+actions = [SubResource("OpenXRAction_move"), SubResource("OpenXRAction_turn")]
+
+[sub_resource type="OpenXRIPBinding" id="OpenXRIPBinding_L_move"]
+action = SubResource("OpenXRAction_move")
+binding_path = "/user/hand/left/input/thumbstick"
+
+[sub_resource type="OpenXRIPBinding" id="OpenXRIPBinding_R_turn"]
+action = SubResource("OpenXRAction_turn")
+binding_path = "/user/hand/right/input/thumbstick"
+
+[sub_resource type="OpenXRInteractionProfile" id="OpenXRInteractionProfile_oculus"]
+interaction_profile_path = "/interaction_profiles/oculus/touch_controller"
+bindings = [SubResource("OpenXRIPBinding_L_move"), SubResource("OpenXRIPBinding_R_turn")]
+
+[sub_resource type="OpenXRIPBinding" id="OpenXRIPBinding_L_move_idx"]
+action = SubResource("OpenXRAction_move")
+binding_path = "/user/hand/left/input/thumbstick"
+
+[sub_resource type="OpenXRIPBinding" id="OpenXRIPBinding_R_turn_idx"]
+action = SubResource("OpenXRAction_turn")
+binding_path = "/user/hand/right/input/thumbstick"
+
+[sub_resource type="OpenXRInteractionProfile" id="OpenXRInteractionProfile_index"]
+interaction_profile_path = "/interaction_profiles/valve/index_controller"
+bindings = [SubResource("OpenXRIPBinding_L_move_idx"), SubResource("OpenXRIPBinding_R_turn_idx")]
+
+[resource]
+action_sets = [SubResource("OpenXRActionSet_main")]
+interaction_profiles = [SubResource("OpenXRInteractionProfile_oculus"), SubResource("OpenXRInteractionProfile_index")]

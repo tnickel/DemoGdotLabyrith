@@ -1,0 +1,96 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://MazeGenerator.gd" id="1_maze"]
+[ext_resource type="Script" path="res://Player.gd" id="2_player"]
+[ext_resource type="Script" path="res://SettingsUI.gd" id="3_ui"]
+
+[sub_resource type="Environment" id="Environment_1"]
+background_mode = 1
+background_color = Color(0.01, 0.01, 0.02, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.4, 0.4, 0.45, 1)
+tonemap_mode = 2
+ssr_enabled = false
+ssr_max_steps = 64
+ssr_fade_out = 0.5
+ssr_depth_tolerance = 0.2
+ssao_enabled = true
+ssil_enabled = false
+glow_enabled = true
+glow_intensity = 0.5
+glow_strength = 0.8
+glow_blend_mode = 1
+glow_bloom = 0.1
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.01
+volumetric_fog_albedo = Color(0.08, 0.15, 0.25, 1)
+volumetric_fog_emission = Color(0.02, 0.05, 0.12, 1)
+volumetric_fog_emission_energy = 0.3
+volumetric_fog_anisotropy = 0.3
+volumetric_fog_length = 64.0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_player"]
+
+[node name="Main" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.5, -0.75, 0.43, 0, 0.5, 0.86, -0.86, -0.43, 0.25, 0, 10, 0)
+shadow_enabled = true
+light_color = Color(0.9, 0.9, 1, 1)
+light_energy = 1.0
+
+[node name="MazeGenerator" type="Node3D" parent="."]
+script = ExtResource("1_maze")
+
+[node name="Player" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+script = ExtResource("2_player")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+shape = SubResource("CapsuleShape3D_player")
+
+[node name="Camera3D" type="Camera3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+current = true
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Player/Camera3D"]
+light_color = Color(0.9, 0.95, 1, 1)
+light_energy = 2.0
+shadow_enabled = true
+spot_range = 15.0
+spot_angle = 45.0
+
+[node name="RayCast3D" type="RayCast3D" parent="Player/Camera3D"]
+target_position = Vector3(0, 0, -50)
+collision_mask = 1
+
+[node name="UI" type="Control" parent="Player"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("3_ui")
+
+[node name="Label" type="Label" parent="Player/UI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -11.5
+offset_right = 10.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+text = "+"
+horizontal_alignment = 1
+vertical_alignment = 1

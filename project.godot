@@ -1,0 +1,44 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Labyrinth Demo"
+run/main_scene="res://startup.tscn"
+run/max_fps=60
+config/features=PackedStringArray("4.3", "Forward Plus")
+config/use_custom_user_dir=true
+config/custom_user_dir_name="Labyrinth Demo"
+debug/file_logging/enable_file_logging=true
+debug/file_logging/log_path="res://godot_debug.log"
+
+[autoload]
+
+SettingsManager="*res://SettingsManager.gd"
+
+[display]
+
+window/size/viewport_width=1600
+window/size/viewport_height=900
+window/size/window_width_override=1600
+window/size/window_height_override=900
+window/stretch/mode="canvas_items"
+
+[rendering]
+
+lights_and_shadows/directional_shadow/soft_shadow_filter_quality=3
+global_illumination/sdfgi/probe_ray_count=2
+environment/defaults/default_clear_color=Color(0.01, 0.01, 0.01, 1)
+anti_aliasing/quality/msaa_3d=2
+
+[xr]
+
+openxr/enabled=false
+shaders/enabled=false

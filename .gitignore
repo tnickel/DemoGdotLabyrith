@@ -1,0 +1,34 @@
+# Godot-specific ignores
+.godot/
+.godot_backup/
+*.translation
+export_presets.cfg
+*.mono/
+
+# Large binary assets (videos, audio, 3D models)
+gallery_video/
+gallery_video_backup/
+gallery/
+audio/
+*.mp4
+*.ogv
+*.ogg
+*.wav
+*.glb
+*.fbx
+*.obj
+
+# Test & log files
+godot_err.txt
+godot_out.txt
+run_log.txt
+laufzeitanalyse.log
+CP*.txt
+CP_*.txt
+
+# System specific ignores
+.DS_Store
+Thumbs.db
+
+# Large tools
+.tools/
